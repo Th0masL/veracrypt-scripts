@@ -10,11 +10,12 @@ Those scripts require veracrypt to be installed (see below to install it and cre
 
 ### 1) Get the latest Linux Generic Installer file
 Go to [Veracrypt Download Page](https://www.veracrypt.fr/en/Downloads.html) and copy the link of the **Linux Generic Installer**
-example: https://launchpad.net/veracrypt/trunk/1.24-hotfix1/+download/veracrypt-1.24-Hotfix1-setup.tar.bz2
+
+Example: https://launchpad.net/veracrypt/trunk/1.24-hotfix1/+download/veracrypt-1.24-Hotfix1-setup.tar.bz2
 
 ### 2) Download and decompress this file
 ```
-wget <URL> -P /tmp # Download the file
+wget <INSTALLER_URL> -P /tmp # Download the file
 mkdir /tmp/veracrypt # Create a folder that will contain the decompressed files
 cd /tmp/veracrypt # Go to this new folder
 tar xjpf ../veracrypt-1.24-Hotfix1-setup.tar.bz2 # Decompress the files in this folder
