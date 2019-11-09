@@ -1,0 +1,4 @@
+# The path of your encrypted partition that Veracrypt will mount
+encrypted_partition="/dev/sda3"
+# The path of where you want to mount it
+mounting_point="/data"
