@@ -29,7 +29,7 @@ chmod +x /tmp/veracrypt/* # Make the extracted files executable
 ```
 mkdir /veracrypt-scripts
 cd /veracrypt-scripts
-git clone git@github.com:Th0masL/veracrypt-scripts.git
+git clone git@github.com:Th0masL/veracrypt-scripts.git .
 chmod +x /veracrypt-scripts/*.sh
 ```
 
