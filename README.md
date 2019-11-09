@@ -2,7 +2,15 @@
 
 This repository contains couple of CLI scripts to make the usage of Veracrypt more easy.
 
-The main idea is to use Veracrypt to secure our data by encrypting a partition on a cloud-hosted server that does not provide full disk encryption.
+The main idea is to use Veracrypt to secure our data on server that cannot use full disk encryption.
+
+The goal is to use some empty space on one of the disks to create a encrypted partition, and mount it on a specific mounting point (i.e: /data).
+
+All the data that is saved in the folder /data will only be accessible once an user that can login on the Linux server has mounted the partition with Veracrypt.
+
+It's also possible to put your websites and other services' data on this encrypted partition.
+
+I my case, I was facing a problem if I would be using full-disk encryption, because my server would not be able to boot, and would require me to physically type the password before loading the operating system. But with the method provided with this encrypted Veracrypt partition, my server can restart by itself. The only thing I have to do is to SSH to my server after it has booted, and mount the encrypted partition.
 
 Those scripts require veracrypt to be installed (see below to install it and create/encrypt the partition).
 
