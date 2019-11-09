@@ -104,16 +104,16 @@ Then you reload systemd daemon `systemctl daemon-reload`.
 
 From now on, NGINX will only start if you have mounted the encrypted partition first.
 
-If you try to star NGINX without having mounted the encrypted partition first, you will get a nice error message.
+If you try to start NGINX without having mounted the encrypted partition first, you will get a nice error message.
 
 ```
-root@server:/# service nginx start
-root@server:/# service nginx status
+root@server:/scripts# service nginx start
+root@server:/scripts# service nginx status
 ● nginx.service - A high performance web server and a reverse proxy server
    Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
-   Active: inactive (dead) since Sat 2019-11-09 18:37:49 UTC; 1h 59min ago
-Condition: start condition failed at Sat 2019-11-09 20:21:32 UTC; 15min ago
-           └─ ConditionPathExists=/data/www was not met
+   Active: inactive (dead) since Sat 2019-11-09 20:40:29 UTC; 20s ago
+Condition: start condition failed at Sat 2019-11-09 20:40:47 UTC; 1s ago
+           └─ ConditionPathExists=/data/nginx was not met
 ```
 
 ## Useful links
