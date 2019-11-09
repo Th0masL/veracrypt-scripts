@@ -6,28 +6,25 @@ The main idea is to use Veracrypt to secure our data by encrypting a partition o
 
 Those scripts require veracrypt to be installed (see below to install it and create/encrypt the partition).
 
-## To install veracrypt using the command line
+## Install Veracrypt using the command line
 
-### 1) Go to https://www.veracrypt.fr/en/Downloads.html and copy the link of the Linux Generic Installer
-i.e.: https://launchpad.net/veracrypt/trunk/1.24-hotfix1/+download/veracrypt-1.24-Hotfix1-setup.tar.bz2
+### 1) Get the latest Linux Generic Installer file
+Go to [Veracrypt Download Page](https://www.veracrypt.fr/en/Downloads.html) and copy the link of the **Linux Generic Installer**
+example: https://launchpad.net/veracrypt/trunk/1.24-hotfix1/+download/veracrypt-1.24-Hotfix1-setup.tar.bz2
 
-### 2) Download this file to the /tmp folder
-`wget <URL> -P /tmp`
-
-### 3) Decompress this file
+### 2) Download and decompress this file
 ```
-mkdir /tmp/veracrypt
-cd /tmp/veracrypt
-tar xjpf ../veracrypt-1.24-Hotfix1-setup.tar.bz2
+wget <URL> -P /tmp # Download the file
+mkdir /tmp/veracrypt # Create a folder that will contain the decompressed files
+cd /tmp/veracrypt # Go to this new folder
+tar xjpf ../veracrypt-1.24-Hotfix1-setup.tar.bz2 # Decompress the files in this folder
+chmod +x /tmp/veracrypt/* # Make the extracted files executable
 ```
 
-### 4) Make the extracted files executable
-`chmod +x /tmp/veracrypt/*`
-
-### 5) Run the console installer and follow the instructions to install it
+### 3) Run the console installer and follow the instructions to install it
 `/tmp/veracrypt/veracrypt-1.24-setup-console-x64`
 
-### 6) Copy/download the files/scripts from this GIT repository to a local folder on your server
+### 4) Copy/download the files/scripts from this GIT repository to a local folder on your server
 ```
 mkdir /veracrypt-scripts
 cd /veracrypt-scripts
@@ -35,7 +32,7 @@ git clone git@github.com:Th0masL/veracrypt-scripts.git
 chmod +x /veracrypt-scripts/*.sh
 ```
 
-## Create a new partition on one of the disks and encrypt it with Veracrypt
+## Create a new partition and encrypt it with Veracrypt
 **WARNING : Only do that on an empty partition! This step will erase the data of the partition that you plan to use.**
 
 ### 1) Use fdisk to create the new partition
