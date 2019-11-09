@@ -46,7 +46,7 @@ fdisk /dev/sda
   -> type 'q' to exit fdisk
 ```
 
-### 2) Use mfs to format the partition to ext4
+### 2) Use mkfs to format the partition to ext4
 In this example, the new partition that I have created earlier has the number 3, so it's going to be /dev/sda3.
 
 `mkfs -t ext4 /dev/sda3`
