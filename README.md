@@ -68,6 +68,54 @@ The options I'm using here are telling Veracrypt that I only want to use a passw
 
 There are other ways to protect the partition, but a password is enough for what I need.
 
+## How to protect some services' data
+
+One thing I wanted to do, is to protect the data of the services I'm using (nginx/docker/nextcloud/...), so here is the method to be able to do it.
+
+In my case, my encrypted partion is mounted in the path `/data`
+
+### 1) Create a folder for your application's data on your encrypted partition
+```
+mkdir /data/nginx # For my websites served by nginx
+mkdir /data/docker # For Docker
+mkdir /data/nextcloud # For Nextcloud
+```
+### 2) Configure those data path in your services
+
+In each service, configure this path as the path where to store the data.
+
+### 3) Prevent the services to start if their data folders are not reachable
+One thing you want to do is to prevent the services to be able to start if the encrypted partition has not been mounted first.
+
+Let's assume you are using SYSTEMD as service manager.
+
+Edit your service's systemd file, and add the directive `ConditionPathExists=<path>` to the section `[Unit]`.
+
+Overview of the nginx SYSTEMD file after edit `/lib/systemd/system/nginx.service` :
+```
+[Unit]
+<... other lines ...>
+ConditionPathExists=/data/nginx
+
+[Service]
+<... other lines ...>
+```
+Then you reload systemd daemon `systemctl daemon-reload`.
+
+From now on, NGINX will only start if you have mounted the encrypted partition first.
+
+If you try to star NGINX without having mounted the encrypted partition first, you will get a nice error message.
+
+```
+root@server:/# service nginx start
+root@server:/# service nginx status
+● nginx.service - A high performance web server and a reverse proxy server
+   Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+   Active: inactive (dead) since Sat 2019-11-09 18:37:49 UTC; 1h 59min ago
+Condition: start condition failed at Sat 2019-11-09 20:21:32 UTC; 15min ago
+           └─ ConditionPathExists=/data/www was not met
+```
+
 ## Useful links
 - [Install Veracrypt on Ubuntu 18.04](https://www.osradar.com/install-veracrypt-on-ubuntu-18-04/)
 - [Encrypt Device with Veracrypt](https://relentlesscoding.com/2019/01/06/encrypt-device-with-veracrypt-from-the-command-line/)
