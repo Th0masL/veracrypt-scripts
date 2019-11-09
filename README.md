@@ -10,7 +10,9 @@ All the data that is saved in the folder /data will only be accessible once an u
 
 It's also possible to put your websites and other services' data on this encrypted partition.
 
-I my case, I was facing a problem if I would be using full-disk encryption, because my server would not be able to boot, and would require me to physically type the password before loading the operating system. But with the method provided with this encrypted Veracrypt partition, my server can restart by itself. The only thing I have to do is to SSH to my server after it has booted, and mount the encrypted partition.
+I my case, I was facing a problem if I would be using full-disk encryption, because my server would not be able to boot, and would require me to physically type the password before loading the operating system.
+
+But with the method provided with this encrypted Veracrypt partition, my server can restart by itself. The only thing I have to do is to SSH to my server after it has booted, and mount the encrypted partition.
 
 Those scripts require veracrypt to be installed (see below to install it and create/encrypt the partition).
 
@@ -61,7 +63,9 @@ In this example, the new partition that I have created earlier has the number 3,
 
 ### Encrypt this new partition with veracrypt
 `veracrypt -t --quick -c /dev/sda3`
-The options I'm using here are to tell Veracrypt that I only want to use a password to protect the encrypted partition.
+
+The options I'm using here are telling Veracrypt that I only want to use a password to protect the encrypted partition.
+
 There are other ways to protect the partition, but a password is enough for what I need.
 
 ## Useful links
