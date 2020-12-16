@@ -41,8 +41,8 @@ fi
 if [[ $( lsblk "$encrypted_partition" | grep "veracrypt" | grep "$mounting_point" ) ]]; then
 	msg "INFO - The encrypted partition $encrypted_partition is already mounted to $mounting_point"
 else
-	# Make sure that if the mounting point folder exists, it's empty
-	if [[ -d "$mounting_point" && $( ls "$mounting_point" ) != "" ]]; then
+	# Make sure that if the mounting point folder exists, it's empty (ignore the file 'unmounted' as we use it to know if the partition is mounted or not)
+	if [[ -d "$mounting_point" && $( ls "$mounting_point" | grep -v "unmounted" ) != "" ]]; then
 		msg "ERROR - The mounting point $mounting_point does not seems to be empty. Please verify the content of this folder."
 		exit 1
 	fi
