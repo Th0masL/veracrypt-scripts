@@ -30,6 +30,12 @@ if [[ "$encrypted_partition" == "" || "$mounting_point" == "" ]]; then
 	exit 1
 fi
 
+# First, make sure that we can see the encrypted partition (for some reason, requires sudo when running in cronjob)
+if [[ -z $( sudo fdisk -l | grep "^/dev" | grep "$encrypted_partition" ) ]]; then
+        msg "ERROR - Unable to find the partition $encrypted_partition. If this parition is on an external disk, please verify that the disk is connected."
+        exit 1
+fi
+
 # Check if the mounting point is mounted or not
 if [[ ! $( lsblk "$encrypted_partition" | grep "veracrypt" | grep "$mounting_point" ) ]]; then
 	msg "OK - The encrypted partition $encrypted_partition is already unmounted from the mounting point $mounting_point"

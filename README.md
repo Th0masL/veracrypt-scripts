@@ -68,6 +68,8 @@ The options I'm using here are telling Veracrypt that I only want to use a passw
 
 There are other ways to protect the partition, but a password is enough for what I need.
 
+Note: For some reasons there's currently a bug with Veracrypt, where it cannot create an ext4 encrypted partitions on big disks (I tried with a 2TB disk). To bypass this bug, if possible, you can either connect your disk on Windows/MacOS and create there using Veracrypt (it will then be compatible on Linux), or use ext3 instead of ext4.
+
 ## How to protect some services' data
 
 One thing I wanted to do, is to protect the data of the services I'm using (nginx/docker/nextcloud/...), so here is the method to be able to do it.
@@ -100,6 +102,7 @@ ConditionPathExists=/data/nginx
 [Service]
 <... other lines ...>
 ```
+
 Then you reload systemd daemon `systemctl daemon-reload`.
 
 From now on, NGINX will only start if you have mounted the encrypted partition first.
@@ -114,6 +117,17 @@ root@server:/scripts# service nginx status
    Active: inactive (dead) since Sat 2019-11-09 20:40:29 UTC; 20s ago
 Condition: start condition failed at Sat 2019-11-09 20:40:47 UTC; 1s ago
            └─ ConditionPathExists=/data/nginx was not met
+```
+
+Another solution would be to use the option `ExecStartPre` under `[Service]`, with the value `/usr/bin/test -d /data/myfolder` or `/usr/bin/test -f /data/myfile`.
+
+Example :
+
+```
+# /lib/systemd/system/docker.service
+
+[Service]
+ExecStartPre=/usr/bin/test -f /data/mounted
 ```
 
 ## Useful links
